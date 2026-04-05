@@ -1,0 +1,73 @@
+---
+alwaysApply: false
+---
+
+# Naming Conventions
+
+Follow these conventions for all new and renamed files and constants.
+
+## Pages, Layouts & Components (`.tsx`)
+
+- **Convention:** PascalCase
+- **Examples:** `LoginPage.tsx`, `ClientSidebar.tsx`, `Sidebar.tsx`, `RejectApplicationModal.tsx`, `RootLayout.tsx`
+- **Exception:** Do not rename files under `src/components/ui/` — they follow shadcn’s default (e.g. `button.tsx`, `dropdown-menu.tsx`). New components outside `components/ui` use PascalCase.
+
+## Hooks (custom hooks & TanStack Query hooks)
+
+- **File name:** kebab-case after the `use-` prefix: `use-<name>.ts`
+- **Examples:** `use-demo.ts`, `use-auth.ts`, `use-mock-data.ts`
+- **Exported hook:** still camelCase with `use` prefix (e.g. `useDemoPost` from `use-demo.ts`)
+- **Location:** `src/lib/hooks/` (app/UI hooks); TanStack Query hooks under `src/api/queries/`
+
+## Type-only modules
+
+- **File name:** `<name>.types.ts` (kebab-case or camelCase `<name>` matching the domain)
+- **Examples:** `demo.types.ts`, `user.types.ts`, `payment.types.ts`
+- **Location:** e.g. `src/api/types/` next to related services/queries
+
+## Utility & Logic Files (`.ts`)
+
+- **Convention:** camelCase
+- **Examples:** `mockData.ts`, `testAccounts.ts`, `paymentMethodIcons.ts`, `authStore.ts`
+- **Applies to:** utils (under `src/lib/utils/`: e.g. `cn.ts`, `currency.ts`, `date.ts`), stores, validations (under `src/lib/validations/`), constants (under `src/lib/constants/`: e.g. `paymentMethodIcons.ts`), and other non-component modules (excluding hooks and `*.types.ts` files above)
+
+## Providers (React context / app wrappers)
+
+- **Location:** `src/lib/providers/`
+- **Convention:** PascalCase for component files (e.g. `QueryProvider.tsx`)
+
+## Constants
+
+- **In code:** UPPER_SNAKE_CASE (e.g. `MAX_RETRIES`, `DEFAULT_PAGE_SIZE`)
+- **Location:** Constant data and config live under `src/lib/constants/` (e.g. `paymentMethodIcons.ts`); file names stay camelCase
+
+## Route guards / layout-level components
+
+- **Location:** `src/components/` at root (e.g. `ProtectedRoute.tsx`), not under feature subfolders like `components/auth/`.
+
+## Page structure (colocate page-specific components)
+
+- Prefer **page folder + index**: `pages/<role>/<PageName>/index.tsx` plus any page-specific components in the same folder (e.g. `ApplicationStatusBadge.tsx`, `RejectApplicationModal.tsx` inside `pages/client/ApplicationsPage/`). This avoids putting page-only components in `src/components/`.
+
+## Folders
+
+- Use **lowercase** for single words: `client`, `admin`, `utils`, `hooks`
+- Use **kebab-case** for multi-word folders: `payment-methods`, `mock-data` (optional; lowercase is also acceptable)
+
+## Assets (images, icons, SVGs)
+
+- **Convention:** kebab-case
+- **Examples:** `security-bank.svg`, `bdo.svg`, `maribank.png`
+- **Applies to:** Files under `assets/` (e.g. `assets/banks/`, `assets/crypto/`, `assets/devices/`, `assets/e-wallets/`)
+
+## Quick Reference
+
+| Type                                                       | Convention                    | Example                 |
+| ---------------------------------------------------------- | ----------------------------- | ----------------------- |
+| Page / layout / component (`.tsx`, except `components/ui`) | PascalCase                    | `ApplicationsPage.tsx`  |
+| Hook files (app + queries)                                 | `use-<kebab>.ts`              | `use-demo.ts`           |
+| Type modules                                               | `<name>.types.ts`             | `demo.types.ts`         |
+| Utility / logic (`.ts`)                                    | camelCase                     | `mockData.ts`           |
+| Constants                                                  | UPPER_SNAKE_CASE              | `MAX_RETRIES`           |
+| Folders                                                    | lowercase / kebab-case        | `client`, `auth-store`  |
+| Assets (images, icons)                                     | kebab-case                    | `security-bank.svg`     |
